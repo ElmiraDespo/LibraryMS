@@ -176,6 +176,30 @@ class LibrarySystem:
         else:
             print("Not enough copies available or book does not exist.")
 
+    # Return Book
+    def return_book(self, username, book_id, quantity):
+        if username in self.users:
+            borrowed_books = self.users[username]["borrowed_books"]
+            for record in borrowed_books:
+                if record["book_id"] == book_id and record["quantity"] == quantity:
+                    borrowed_books.remove(record)  # Remove from user's borrowed list
+                    self.books[book_id]["copies"] += quantity  # Return copies
+                    return_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    overdue = self.check_overdue(record["return_date"])
+                    remarks = "Overdue" if overdue else "Returned"
+                    self.history.append({
+                        "username": username,
+                        "book_id": book_id,
+                        "quantity": quantity,
+                        "return_date": return_date,
+                        "remarks": remarks,
+                    })
+                    print(f"Book '{self.books[book_id]['title']}' returned successfully!")
+                    self.save_data()  # Save data after changes
+                    return
+            print("This book was not borrowed by the user or quantity mismatched.")
+        else:
+            print("User not found.")
 
 def start(self):
         while True:
