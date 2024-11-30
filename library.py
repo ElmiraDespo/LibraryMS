@@ -219,6 +219,27 @@ class LibrarySystem:
         return_date_obj = datetime.datetime.strptime(return_date, "%Y-%m-%d %H:%M:%S")
         return current_date > return_date_obj  # Returns True if overdue
 
+    # View Borrowing/Returning History (Librarian only)
+    def view_history(self, password):
+        if password == self.librarian_password:
+            print("\n---------------------------- Borrowing/Returning History ----------------------------")
+            
+            if not self.history:
+                print("No borrowing/returning history available.")
+                return
+
+            print(f"{'Username':<50} {'Book ID':<10} {'Quantity':<10} {'Borrow Date':<20} {'Return Date':<20} {'Remarks':<10}")
+            print("-" * 120)
+
+            for record in self.history:
+                borrow_date = record.get('borrow_date', 'N/A')
+                return_date = record.get('return_date', 'N/A')
+                remarks = record.get('remarks', 'N/A')
+                print(f"{record['username']:<50} {record['book_id']:<10} {record['quantity']:<10} {borrow_date:<20} {return_date:<20} {remarks:<10}")
+
+            print("\n----------------------------------------------------------------------------------------------------------------------------")
+        else:
+            print("Incorrect password.")
 def start(self):
         while True:
             print("\n------------------------------------------- WELCOME TO LIBRARY MANAGEMENT SYSTEM ------------------------------------------")
