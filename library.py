@@ -136,7 +136,7 @@ class LibrarySystem:
             self.save_data()  # Save data after changes
         else:
             print("Book already exists.")
-                    
+
     # Add User
     def add_user(self, username, section):
         if username not in self.users:
@@ -200,6 +200,24 @@ class LibrarySystem:
             print("This book was not borrowed by the user or quantity mismatched.")
         else:
             print("User not found.")
+
+     # Delete Book (Librarian only)
+    def delete_book(self, password, book_id):
+        if password == self.librarian_password:
+            if book_id in self.books:
+                del self.books[book_id]
+                print(f"Book with ID '{book_id}' deleted successfully.")
+                self.save_data()  # Save data after deletion
+            else:
+                print("Book not found.")
+        else:
+            print("Incorrect librarian password.")
+            
+    # Check Overdue
+    def check_overdue(self, return_date):
+        current_date = datetime.datetime.now()
+        return_date_obj = datetime.datetime.strptime(return_date, "%Y-%m-%d %H:%M:%S")
+        return current_date > return_date_obj  # Returns True if overdue
 
 def start(self):
         while True:
