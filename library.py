@@ -240,6 +240,24 @@ class LibrarySystem:
             print("\n----------------------------------------------------------------------------------------------------------------------------")
         else:
             print("Incorrect password.")
+
+     # View Registered Users (Librarian only)
+    def view_users(self):
+        print("\n----------------------------------------------------- Registered Users ----------------------------------------------------")
+        
+        if not self.users:
+            print("No users registered in the system.")
+            return
+
+        print(f"{'Username':<20} {'Section':<20} {'Borrowed Books':<40}")
+        print("-" * 123)  # To draw a line between headers and content
+
+        # Print each user's details
+        for username, details in self.users.items():
+            borrowed_books = ", ".join([book["book_id"] for book in details["borrowed_books"]]) if details["borrowed_books"] else "None"
+            print(f"{username:<20} {details['section']:<20} {borrowed_books:<40}")
+        
+        print("\n---------------------------------------------------------------------------------------------------------------------------")
 def start(self):
         while True:
             print("\n------------------------------------------- WELCOME TO LIBRARY MANAGEMENT SYSTEM ------------------------------------------")
