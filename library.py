@@ -67,7 +67,48 @@ class LibrarySystem:
 
         print("Data saved successfully!")
 
-        
+        def load_data(self):
+        # Start with the default books
+         self.books = self.default_books.copy()
+
+        if os.path.exists("books.csv"):
+            with open("books.csv", "r") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    self.books[row["book_id"]] = {
+                        "title": row["title"],
+                        "author": row["author"],
+                        "copies": int(row["copies"]),
+                        "publish_year": int(row["publish_year"]),
+                    }
+            print("Books data loaded successfully!")
+
+        if os.path.exists("users.csv"):
+            with open("users.csv", "r") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    borrowed_books = eval(row["borrowed_books"])  # Convert string back to list of dicts
+                    self.users[row["username"]] = {"section": row["section"], "borrowed_books": borrowed_books}
+            print("Users data loaded successfully!")
+
+        if os.path.exists("history.csv"):
+            with open("history.csv", "r") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    self.history.append({
+                        "username": row.get("username", "Unknown"),
+                        "book_id": row.get("book_id", "Unknown"),
+                        "quantity": int(row.get("quantity", 0)),
+                        "borrow_date": row.get("borrow_date", "N/A"),
+                        "return_date": row.get("return_date", "N/A"),
+                        "remarks": row.get("remarks", "N/A"),
+                    })
+            print("History data loaded successfully!")
+        else:
+            print("No saved data found, starting with default books.")
+
+
+
 def start(self):
         while True:
             print("\n------------------------------------------- WELCOME TO LIBRARY MANAGEMENT SYSTEM ------------------------------------------")
