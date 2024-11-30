@@ -122,7 +122,21 @@ class LibrarySystem:
         for book_id, details in self.books.items():
             print(f"{book_id:<10} {details['title']:<40} {details['author']:<25} {details['copies']:<10} {details['publish_year']:<15}")   
         print("\n---------------------------------------------------------------------------------------------------------------------------")
-            
+
+    # Add Book
+    def add_book(self, book_id, title, author, copies, publish_year):
+        if book_id not in self.books:
+            self.books[book_id] = {
+                "title": title,
+                "author": author,
+                "copies": copies,
+                "publish_year": publish_year,
+            }
+            print(f"Book '{title}' added successfully!")
+            self.save_data()  # Save data after changes
+        else:
+            print("Book already exists.")
+                    
     # Add User
     def add_user(self, username, section):
         if username not in self.users:
