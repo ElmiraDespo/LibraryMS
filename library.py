@@ -4,7 +4,6 @@ import os
 
 class LibrarySystem:
     def __init__(self):
-        # Predefined books in the library (always available even if no CSV file exists)
         self.default_books = {
             "B001": {"title": "Harry Potter and the Sorcerer's Stone", "author": "J.K. Rowling", "copies": 5, "publish_year": 1997},
             "B002": {"title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "copies": 3, "publish_year": 1925},
@@ -15,7 +14,7 @@ class LibrarySystem:
         self.users = {}
         self.history = []
         self.librarian_password = "library"
-        self.load_data()  # Load data from CSV or use default data if no CSV exists
+        self.load_data()
 
     # Show Menu for Librarians
     def show_librarian_menu(self):
@@ -25,7 +24,7 @@ class LibrarySystem:
         print("3. Add User")
         print("4. View Borrowing/Returning History")
         print("5. View Registered Users")
-        print("6. Delete Book")  # New option added to delete book
+        print("6. Delete Book")
         print("7. Exit")
     #SHOW MENU FOR STUDENTS
     def show_user_menu(self):
@@ -207,7 +206,7 @@ class LibrarySystem:
             if book_id in self.books:
                 del self.books[book_id]
                 print(f"Book with ID '{book_id}' deleted successfully.")
-                self.save_data()  # Save data after deletion
+                self.save_data()  
             else:
                 print("Book not found.")
         else:
@@ -217,7 +216,7 @@ class LibrarySystem:
     def check_overdue(self, return_date):
         current_date = datetime.datetime.now()
         return_date_obj = datetime.datetime.strptime(return_date, "%Y-%m-%d %H:%M:%S")
-        return current_date > return_date_obj  # Returns True if overdue
+        return current_date > return_date_obj 
 
     # View Borrowing/Returning History (Librarian only)
     def view_history(self, password):
@@ -330,7 +329,7 @@ def start(self):
 
                         while True:
                             book_id = input("Enter Book ID to borrow: ")
-                            quantity = 1  # Default to borrowing 1 copy
+                            quantity = 1  
 
                             while True:
                                 suggested_date = (datetime.datetime.now() + datetime.timedelta(days=7)).strftime("%Y-%m-%d")
