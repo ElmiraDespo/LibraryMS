@@ -310,3 +310,63 @@ def start(self):
                     else:
                         print("Incorrect password. Please try again.")
                         continue
+            elif user_type == "2":
+              
+                while True:
+                    self.show_user_menu()
+                    choice = input("Choose an option: ")
+
+                    if choice == "1":
+                        self.display_books()
+
+                    elif choice == "2":
+                        username = input("Enter your Username: ")
+                        if username not in self.users:
+                            print(f"User '{username}' not found. Please register first.")
+                            register = input("Do you want to register now? (y/n): ")
+                            if register.lower() == 'y':
+                                section = input("Enter your Section: ")
+                                self.add_user(username, section)
+
+                        while True:
+                            book_id = input("Enter Book ID to borrow: ")
+                            quantity = 1  # Default to borrowing 1 copy
+
+                            while True:
+                                suggested_date = (datetime.datetime.now() + datetime.timedelta(days=7)).strftime("%Y-%m-%d")
+                                return_date_input = input(f"Enter return date (YYYY-MM-DD): ")
+                                try:
+                                    return_date = datetime.datetime.strptime(return_date_input, "%Y-%m-%d").strftime("%Y-%m-%d %H:%M:%S")
+                                    if datetime.datetime.strptime(return_date, "%Y-%m-%d %H:%M:%S") < datetime.datetime.now():
+                                        print("Error: Return date cannot be earlier than the current date.")
+                                        continue
+                                    self.borrow_book(username, book_id, quantity, return_date)
+                                    break
+                                except ValueError:
+                                    print("Invalid date format. Please use YYYY-MM-DD.")
+                                    continue
+
+                            more_books = input("Do you want to borrow more books? (y/n): ")
+                            if more_books.lower() != 'y':
+                                break
+
+                    elif choice == "3":
+                        username = input("Enter your Username: ")
+                        book_id = input("Enter Book ID to return: ")
+                        quantity = int(input("Enter number of books to return: "))
+                        self.return_book(username, book_id, quantity)
+
+                    elif choice == "4":
+                        print("Exiting Student Menu...")
+                        break
+
+                    else:
+                        print("Invalid option. Please try again.")
+            else:
+                print("Invalid option. Please choose either '1' for Librarian or '2' for Student.")
+
+
+# Run the system
+library_system = LibrarySystem()
+library_system.start()
+
