@@ -264,3 +264,49 @@ def start(self):
             print("[1] Librarian")
             print("[2] Student")
             user_type = input("Choose your role: ")
+
+            if user_type == "1":
+                while True:
+                    password = input("Enter librarian password or type 'exit' to quit: ")
+                    if password == "exit":
+                        print("Exiting Librarian Login...")
+                        break
+                    elif password == self.librarian_password:
+                        while True:
+                            self.show_librarian_menu()
+                            choice = input("Choose an option: ")
+
+                            if choice == "1":
+                                self.display_books()
+
+                            elif choice == "2":
+                                book_id = input("Enter Book ID: ")
+                                title = input("Enter Book title: ")
+                                author = input("Enter Author: ")
+                                copies = int(input("Enter Number of Copies: "))
+                                publish_year = int(input("Enter Published Year: "))
+                                self.add_book(book_id, title, author, copies, publish_year)
+
+                            elif choice == "3":
+                                username = input("Enter Username: ")
+                                section = input("Enter Section: ")
+                                self.add_user(username, section)
+
+                            elif choice == "4":
+                                self.view_history(password)
+
+                            elif choice == "5":
+                                self.view_users()
+                            
+                            elif choice == "6":
+                                book_id = input("Enter Book ID to delete: ")
+                                self.delete_book(password, book_id)
+                            elif choice == "7":
+                               print("Exiting Librarian Menu...")
+                               break
+                            else:
+                                print("Invalid option. Please try again.")
+                        break
+                    else:
+                        print("Incorrect password. Please try again.")
+                        continue
