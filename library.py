@@ -86,7 +86,7 @@ class LibrarySystem:
             with open("users.csv", "r") as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    borrowed_books = eval(row["borrowed_books"])  # Convert string back to list of dicts
+                    borrowed_books = eval(row["borrowed_books"])  
                     self.users[row["username"]] = {"section": row["section"], "borrowed_books": borrowed_books}
             print("Users data loaded successfully!")
 
@@ -171,7 +171,7 @@ class LibrarySystem:
                 "remarks": "Borrowed",
             })
             print(f"Book '{self.books[book_id]['title']}' borrowed successfully!")
-            self.save_data()  # Save data after changes
+            self.save_data() 
         else:
             print("Not enough copies available or book does not exist.")
 
@@ -194,7 +194,7 @@ class LibrarySystem:
                         "remarks": remarks,
                     })
                     print(f"Book '{self.books[book_id]['title']}' returned successfully!")
-                    self.save_data()  # Save data after changes
+                    self.save_data() 
                     return
             print("This book was not borrowed by the user or quantity mismatched.")
         else:
