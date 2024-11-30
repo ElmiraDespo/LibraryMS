@@ -107,6 +107,32 @@ class LibrarySystem:
         else:
             print("No saved data found, starting with default books.")
 
+# Display books in a formatted table
+    def display_books(self):
+        if not self.books:
+            print("No books available in the library.")
+            return
+
+        # Print table header
+        print("\n------------------------------------------------------ LIBRARY BOOKS ------------------------------------------------------")
+        print(f"{'Book ID':<10} {'Book Title':<40} {'Author':<25} {'Copies':<10} {'Published Year':<15}")
+        print("-" * 123)       
+
+        # Print each book's details
+        for book_id, details in self.books.items():
+            print(f"{book_id:<10} {details['title']:<40} {details['author']:<25} {details['copies']:<10} {details['publish_year']:<15}")   
+        print("\n---------------------------------------------------------------------------------------------------------------------------")
+            
+    # Add User
+    def add_user(self, username, section):
+        if username not in self.users:
+            # Add the user and initialize their borrowed books as an empty list
+            self.users[username] = {"section": section, "borrowed_books": []}
+            print(f"User '{username}' from Section '{section}' added successfully!")
+            self.save_data()  # Save data after changes
+        else:
+            print("User already exists.")
+
 
 
 def start(self):
