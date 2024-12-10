@@ -1,0 +1,9 @@
+username,book_id,quantity,borrow_date,return_date,remarks
+Erich,B002,1,2024-11-30 08:10:18,2024-12-01 00:00:00,Borrowed
+Erich,B002,1,2024-11-30 08:34:07,2024-12-01 00:00:00,Borrowed
+Erich,B002,1,,2024-11-30 08:35:50,Returned
+Erich,B002,1,,2024-11-30 08:36:20,Returned
+Elmira,B001,1,2024-12-09 10:30:39,2024-12-10 00:00:00,Borrowed
+Elmira,B001,1,2024-12-09 10:31:07,2024-12-10 00:00:00,Borrowed
+Elmira,B001,1,N/A,2024-12-09 10:35:11,Returned
+Elmira,B003,1,2024-12-10 17:29:30,2024-12-12 00:00:00,Borrowed
